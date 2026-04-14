@@ -1,0 +1,28 @@
+CREATE DATABASE IF NOT EXISTS hotel_reservas;
+USE hotel_reservas;
+
+CREATE TABLE IF NOT EXISTS hoteles (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  direccion VARCHAR(255) NOT NULL,
+  estrellas INT,
+  telefono VARCHAR(20)
+);
+
+CREATE TABLE IF NOT EXISTS clientes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  email VARCHAR(150) UNIQUE NOT NULL,
+  telefono VARCHAR(50),
+);
+
+CREATE TABLE IF NOT EXISTS reservas (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  cliente_id INT NOT NULL,
+  hotel_id INT NOT NULL,
+  fecha_entrada DATE NOT NULL,
+  fecha_salida DATE NOT NULL,
+  num_huespedes INT DEFAULT(1) NOT NULL,
+  FOREIGN KEY (cliente_id) REFERENCES clientes(id) ON DELETE CASCADE,
+  FOREIGN KEY (hotel_id) REFERENCES hoteles(id) ON DELETE CASCADE
+);
