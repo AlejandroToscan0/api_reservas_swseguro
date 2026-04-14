@@ -11,24 +11,24 @@ async function findById(id) {
 }
 
 async function create(data) {
-  const { nombre, direccion, ciudad, estrellas, precio_noche } = data;
+  const { nombre, direccion, estrellas, telefono } = data;
   return pool.query(
-    'INSERT INTO hoteles (nombre, direccion, ciudad, estrellas, precio_noche) VALUES (?, ?, ?, ?, ?)',
-    [nombre, direccion, ciudad, estrellas, precio_noche]
+    'INSERT INTO hoteles (nombre, direccion, estrellas, telefono) VALUES (?, ?, ?, ?)',
+    [nombre, direccion, estrellas, telefono]
   );
 }
 
 async function update(id, data) {
-  const { nombre, direccion, ciudad, estrellas, precio_noche } = data;
+  const { nombre, direccion, estrellas, telefono } = data;
   return pool.query(
-    'UPDATE hoteles SET nombre = ?, direccion = ?, ciudad = ?, estrellas = ?, precio_noche = ? WHERE id = ?',
-    [nombre, direccion, ciudad, estrellas, precio_noche, id]
+    'UPDATE hoteles SET nombre = ?, direccion = ?, estrellas = ?, telefono = ? WHERE id = ?',
+    [nombre, direccion, estrellas, telefono, id]
   );
 }
 
-/*async function remove(id) {
+async function remove(id) {
   return pool.query('DELETE FROM hoteles WHERE id = ?', [id]);
-}*/
+}
 
 module.exports = {
   findAll,

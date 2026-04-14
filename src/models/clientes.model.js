@@ -11,24 +11,24 @@ async function findById(id) {
 }
 
 async function create(data) {
-  const { nombre, email, telefono, nacionalidad } = data;
+  const { nombre, email, telefono } = data;
   return pool.query(
-    'INSERT INTO clientes (nombre, email, telefono, nacionalidad) VALUES (?, ?, ?, ?)',
-    [nombre, email, telefono, nacionalidad]
+    'INSERT INTO clientes (nombre, email, telefono) VALUES (?, ?, ?)',
+    [nombre, email, telefono]
   );
 }
 
 async function update(id, data) {
-  const { nombre, email, telefono, nacionalidad } = data;
+  const { nombre, email, telefono } = data;
   return pool.query(
-    'UPDATE clientes SET nombre = ?, email = ?, telefono = ?, nacionalidad = ? WHERE id = ?',
-    [nombre, email, telefono, nacionalidad, id]
+    'UPDATE clientes SET nombre = ?, email = ?, telefono = ? WHERE id = ?',
+    [nombre, email, telefono, id]
   );
 }
 
-/*async function remove(id) {
+async function remove(id) {
   return pool.query('DELETE FROM clientes WHERE id = ?', [id]);
-}*/
+}
 
 module.exports = {
   findAll,
