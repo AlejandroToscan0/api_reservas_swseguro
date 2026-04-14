@@ -40,6 +40,4 @@ npm run dev
 - `PUT /api/hoteles/:id`
 - `PUT /api/clientes/:id`
 - `PUT /api/reservas/:id`
-- `DELETE /api/hoteles/:id`
-- `DELETE /api/clientes/:id`
-- `DELETE /api/reservas/:id`
+
