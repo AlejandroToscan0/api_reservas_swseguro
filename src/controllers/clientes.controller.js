@@ -42,7 +42,7 @@ async function updateCliente(req, res, next) {
   }
 }
 
-async function deleteCliente(req, res, next) {
+/*async function deleteCliente(req, res, next) {
   try {
     const result = await clientesModel.remove(req.params.id);
     if (result.affectedRows === 0) {
@@ -52,7 +52,7 @@ async function deleteCliente(req, res, next) {
   } catch (error) {
     next(error);
   }
-}
+}*/
 
 module.exports = {
   getClientes,

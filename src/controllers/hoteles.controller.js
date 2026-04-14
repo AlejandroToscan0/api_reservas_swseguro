@@ -42,7 +42,7 @@ async function updateHotel(req, res, next) {
   }
 }
 
-async function deleteHotel(req, res, next) {
+/*async function deleteHotel(req, res, next) {
   try {
     const result = await hotelesModel.remove(req.params.id);
     if (result.affectedRows === 0) {
@@ -52,7 +52,7 @@ async function deleteHotel(req, res, next) {
   } catch (error) {
     next(error);
   }
-}
+}*/
 
 module.exports = {
   getHoteles,

@@ -26,9 +26,9 @@ async function update(id, data) {
   );
 }
 
-async function remove(id) {
+/*async function remove(id) {
   return pool.query('DELETE FROM clientes WHERE id = ?', [id]);
-}
+}*/
 
 module.exports = {
   findAll,

@@ -42,7 +42,7 @@ async function updateReserva(req, res, next) {
   }
 }
 
-async function deleteReserva(req, res, next) {
+/*async function deleteReserva(req, res, next) {
   try {
     const result = await reservasModel.remove(req.params.id);
     if (result.affectedRows === 0) {
@@ -52,7 +52,7 @@ async function deleteReserva(req, res, next) {
   } catch (error) {
     next(error);
   }
-}
+}*/
 
 module.exports = {
   getReservas,
