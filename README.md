@@ -129,17 +129,4 @@ Requests minimos sugeridos:
 10. Requests invalidos para confirmar `400` (faltando campos obligatorios)
 11. `PUT` a id inexistente para confirmar `404`
 
-## Colección Postman (Importable)
-
-Se incluye una colección lista para importar:
-
-- `postman/api_reservas_swseguro.postman_collection.json`
-
-Incluye:
-
-- Carpeta de Hoteles, Clientes y Reservas
-- Requests para validar `200`, `201`, `400` y `404`
-- Variables de colección (`baseUrl`, `hotelId`, `clienteId`, `reservaId`)
-
-Para macOS y Windows, solo ajusta `baseUrl` si usas otro puerto o host distinto de `http://localhost:3000`.
 
