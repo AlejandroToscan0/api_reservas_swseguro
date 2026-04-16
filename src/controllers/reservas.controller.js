@@ -1,5 +1,11 @@
 const reservasModel = require('../models/reservas.model');
 
+function hasRequiredReservaFields(body) {
+  if (!body || typeof body !== 'object') return false;
+  const { fecha_entrada, fecha_salida, hotel_id, cliente_id } = body;
+  return Boolean(fecha_entrada && fecha_salida && hotel_id && cliente_id);
+}
+
 async function getReservas(req, res, next) {
   try {
     const reservas = await reservasModel.findAll();
@@ -23,6 +29,13 @@ async function getReservaById(req, res, next) {
 
 async function createReserva(req, res, next) {
   try {
+    if (!hasRequiredReservaFields(req.body)) {
+      return res.status(400).json({
+        error: true,
+        message: 'Datos invalidos: fecha_entrada, fecha_salida, hotel_id y cliente_id son obligatorios',
+      });
+    }
+
     const result = await reservasModel.create(req.body);
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (error) {
@@ -32,6 +45,13 @@ async function createReserva(req, res, next) {
 
 async function updateReserva(req, res, next) {
   try {
+    if (!hasRequiredReservaFields(req.body)) {
+      return res.status(400).json({
+        error: true,
+        message: 'Datos invalidos: fecha_entrada, fecha_salida, hotel_id y cliente_id son obligatorios',
+      });
+    }
+
     const result = await reservasModel.update(req.params.id, req.body);
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Reserva no encontrada' });
@@ -59,5 +79,4 @@ module.exports = {
   getReservaById,
   createReserva,
   updateReserva,
-  deleteReserva,
 };

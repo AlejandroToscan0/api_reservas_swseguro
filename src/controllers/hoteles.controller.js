@@ -1,5 +1,11 @@
 const hotelesModel = require('../models/hoteles.model');
 
+function hasRequiredHotelFields(body) {
+  if (!body || typeof body !== 'object') return false;
+  const { nombre, direccion } = body;
+  return Boolean(nombre && direccion);
+}
+
 async function getHoteles(req, res, next) {
   try {
     const hoteles = await hotelesModel.findAll();
@@ -23,6 +29,13 @@ async function getHotelById(req, res, next) {
 
 async function createHotel(req, res, next) {
   try {
+    if (!hasRequiredHotelFields(req.body)) {
+      return res.status(400).json({
+        error: true,
+        message: 'Datos invalidos: nombre y direccion son obligatorios',
+      });
+    }
+
     const result = await hotelesModel.create(req.body);
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (error) {
@@ -32,6 +45,13 @@ async function createHotel(req, res, next) {
 
 async function updateHotel(req, res, next) {
   try {
+    if (!hasRequiredHotelFields(req.body)) {
+      return res.status(400).json({
+        error: true,
+        message: 'Datos invalidos: nombre y direccion son obligatorios',
+      });
+    }
+
     const result = await hotelesModel.update(req.params.id, req.body);
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Hotel no encontrado' });
@@ -59,5 +79,4 @@ module.exports = {
   getHotelById,
   createHotel,
   updateHotel,
-  deleteHotel,
 };

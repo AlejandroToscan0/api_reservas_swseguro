@@ -1,5 +1,11 @@
 const clientesModel = require('../models/clientes.model');
 
+function hasRequiredClienteFields(body) {
+  if (!body || typeof body !== 'object') return false;
+  const { nombre, email } = body;
+  return Boolean(nombre && email);
+}
+
 async function getClientes(req, res, next) {
   try {
     const clientes = await clientesModel.findAll();
@@ -23,6 +29,13 @@ async function getClienteById(req, res, next) {
 
 async function createCliente(req, res, next) {
   try {
+    if (!hasRequiredClienteFields(req.body)) {
+      return res.status(400).json({
+        error: true,
+        message: 'Datos invalidos: nombre y email son obligatorios',
+      });
+    }
+
     const result = await clientesModel.create(req.body);
     res.status(201).json({ id: result.insertId, ...req.body });
   } catch (error) {
@@ -32,6 +45,13 @@ async function createCliente(req, res, next) {
 
 async function updateCliente(req, res, next) {
   try {
+    if (!hasRequiredClienteFields(req.body)) {
+      return res.status(400).json({
+        error: true,
+        message: 'Datos invalidos: nombre y email son obligatorios',
+      });
+    }
+
     const result = await clientesModel.update(req.params.id, req.body);
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: 'Cliente no encontrado' });
@@ -59,5 +79,4 @@ module.exports = {
   getClienteById,
   createCliente,
   updateCliente,
-  deleteCliente,
 };

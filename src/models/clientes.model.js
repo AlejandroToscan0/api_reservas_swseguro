@@ -12,22 +12,25 @@ async function findById(id) {
 
 async function create(data) {
   const { nombre, email, telefono } = data;
-  return pool.query(
+  const [result] = await pool.query(
     'INSERT INTO clientes (nombre, email, telefono) VALUES (?, ?, ?)',
     [nombre, email, telefono]
   );
+  return result;
 }
 
 async function update(id, data) {
   const { nombre, email, telefono } = data;
-  return pool.query(
+  const [result] = await pool.query(
     'UPDATE clientes SET nombre = ?, email = ?, telefono = ? WHERE id = ?',
     [nombre, email, telefono, id]
   );
+  return result;
 }
 
 async function remove(id) {
-  return pool.query('DELETE FROM clientes WHERE id = ?', [id]);
+  const [result] = await pool.query('DELETE FROM clientes WHERE id = ?', [id]);
+  return result;
 }
 
 module.exports = {
