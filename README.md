@@ -23,8 +23,6 @@ Operaciones incluidas: `GET`, `POST`, `PUT`.
 
 ## Configuración
 
-Este proyecto funciona en macOS y Windows. Las diferencias estan en los comandos para levantar MySQL y cargar el script.
-
 1. Instalar dependencias:
 
 ```bash
